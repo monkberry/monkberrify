@@ -1,6 +1,6 @@
 {
   "name": "monkberrify",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Browserify transform for monkberry",
   "main": "monkberrify.js",
   "scripts": {
@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/monkberry/monkberrify#readme",
   "dependencies": {
-    "monkberry": "1.x",
     "through": "^2.3.8"
   }
 }
