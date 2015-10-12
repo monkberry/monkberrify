@@ -12,9 +12,7 @@ function Monkberrify(file) {
   }
 
   function write(buf, enc, next) {
-
     var name = path.parse(file).name;
-    console.log(file);
     var text = fs.readFileSync(file, {encoding: 'utf8'});
     Monkberry(name, text, {
       normalizeWhitespace: true
