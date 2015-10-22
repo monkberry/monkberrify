@@ -1,7 +1,7 @@
 # Monkberrify
 
 ```
-npm install monkberrify --save-dev
+npm install monkberrify --save
 ```
 
 ## Example

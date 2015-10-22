@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/monkberry/monkberrify#readme",
   "dependencies": {
-    "through": "^2.3.8"
+    "monkberry": "^3.0.0",
+    "through": "^2.3.8",
+    "convert-source-map": "^1.1.1"
   }
 }
