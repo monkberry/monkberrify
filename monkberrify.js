@@ -1,12 +1,14 @@
-var monkberry = require('../lib/compiler');
+var Monkberry = require('../lib/index');
 var through = require('through');
 var convert = require('convert-source-map');
 var path = require('path');
 
-function compile(file, data, callback) {
-  var node, compiler = new monkberry();
+var compiler = new Monkberry.Compiler();
+
+function compile(file, data, type, callback) {
+  var node;
   try {
-    compiler.addSource(path.parse(file).name, data);
+    compiler.addSource(path.parse(file).name, data, type);
     node = compiler.compile(true);
   } catch (error) {
     callback(error);
@@ -28,7 +30,15 @@ function compile(file, data, callback) {
 }
 
 function monkberrify(file) {
-  if (!monkberrify.isMonkberry.test(file)) {
+  var type = null;
+
+  Object.keys(monkberrify.is).forEach(function (key) {
+    if (monkberrify.is[key].test(file)) {
+      type = key;
+    }
+  });
+
+  if (!type) {
     return through();
   }
 
@@ -41,7 +51,7 @@ function monkberrify(file) {
   }
 
   function end() {
-    compile(file, data, function (error, result) {
+    compile(file, data, type, function (error, result) {
       if (error) stream.emit('error', error);
       stream.queue(result);
       stream.queue(null);
@@ -50,7 +60,8 @@ function monkberrify(file) {
 }
 
 monkberrify.compile = compile;
-monkberrify.isMonkberry = /\.(monk|html)$/;
+monkberrify.is = {};
+monkberrify.is.monk = /\.(monk|html)$/;
 monkberrify.sourceMap = true;
 
 module.exports = monkberrify;
