@@ -9,15 +9,14 @@ npm install monkberrify --save
 If your are using Gulp:
 
 ```js
-var gulp = require('gulp');
-var browserify = require('gulp-browserify');
-
-gulp.task('js', function() {
-  gulp.src('app.js', { read: false })
+gulp.task('default', function() {
+  gulp.src('app.js')
     .pipe(browserify({
-      transform: ['monkberrify']
+      transform: [monkberrify],
+      debug: true
     }))
-    .pipe(gulp.dest('.tmp'))
+    .pipe(rename('bundle.js'))
+    .pipe(gulp.dest('.'))
 });
 ```
 

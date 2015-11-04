@@ -1,13 +1,12 @@
-var Monkberry = require('../lib/index');
+var Monkberry = require('monkberry');
 var through = require('through');
 var convert = require('convert-source-map');
 var path = require('path');
 
-var compiler = new Monkberry.Compiler();
-
 function compile(file, data, type, callback) {
   var node;
   try {
+    var compiler = new Monkberry.Compiler();
     compiler.addSource(path.parse(file).name, data, type);
     node = compiler.compile(true);
   } catch (error) {
@@ -19,8 +18,7 @@ function compile(file, data, type, callback) {
     var output = node.toStringWithSourceMap({
       file: file
     });
-    var map = convert.fromJSON(output.map);
-    map.setProperty('sources', [file]);
+    var map = convert.fromJSON(output.map.toString());
 
     callback(null, output.code + '\n' + map.toComment() + '\n');
   } else {
