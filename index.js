@@ -7,7 +7,7 @@ function compile(file, data, type, callback) {
   var node;
   try {
     var compiler = new Monkberry.Compiler();
-    compiler.addSource(path.parse(file).name, data, type);
+    compiler.addSource(file, data, type);
     node = compiler.compile(true);
   } catch (error) {
     callback(error);
@@ -15,14 +15,13 @@ function compile(file, data, type, callback) {
   }
 
   if (monkberrify.sourceMap) {
-    var output = node.toStringWithSourceMap({
-      file: file
-    });
-    var map = convert.fromJSON(output.map.toString());
+    var output = node.toStringWithSourceMap();
+    output.map.setSourceContent(file, data);
 
-    callback(null, output.code + '\n' + map.toComment() + '\n');
+    var map = convert.fromJSON(output.map.toString());
+    callback(null, output.code + '\n' + map.toComment());
   } else {
-    callback(null, node.toString() + '\n');
+    callback(null, node.toString());
   }
 
 }
