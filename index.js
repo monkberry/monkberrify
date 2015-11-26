@@ -7,7 +7,7 @@ function compile(file, data, type, callback) {
   var node;
   try {
     var compiler = new Monkberry.Compiler();
-    compiler.addSource(file, data, type);
+    compiler.addSource(path.basename(file), data, type);
     node = compiler.compile(true);
   } catch (error) {
     callback(error);
@@ -58,7 +58,7 @@ function monkberrify(file) {
 
 monkberrify.compile = compile;
 monkberrify.is = {};
-monkberrify.is.monk = /\.(monk|html)$/;
+monkberrify.is.default = /\.(monk|html)$/;
 monkberrify.sourceMap = true;
 
 module.exports = monkberrify;
