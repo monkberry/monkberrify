@@ -7,6 +7,11 @@ function compile(file, data, type, callback) {
   var node;
   try {
     var compiler = new Monkberry.Compiler();
+
+    if (monkberrify.globals) {
+      compiler.globals = monkberrify.globals;
+    }
+
     compiler.addSource(path.basename(file), data, type);
     node = compiler.compile(true);
   } catch (error) {
@@ -60,5 +65,6 @@ monkberrify.compile = compile;
 monkberrify.is = {};
 monkberrify.is.default = /\.(monk|html)$/;
 monkberrify.sourceMap = true;
+monkberrify.globals = [];
 
 module.exports = monkberrify;
