@@ -1,6 +1,6 @@
 {
   "name": "monkberrify",
-  "version": "3.8.2",
+  "version": "4.0.0-beta",
   "description": "Browserify transform for monkberry",
   "main": "index.js",
   "scripts": {
