@@ -24,6 +24,6 @@
     "through": "^2.3.8"
   },
   "peerDependencies": {
-    "monkberry": "*"
+    "monkberry": "4.x"
   }
 }
