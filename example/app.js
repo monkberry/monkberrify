@@ -1,3 +1,5 @@
-var monkberry = require('../node_modules/monkberry/monkberry');
-var template = require('./view.monk');
-var view = monkberry.render(template, document.body);
+var Monkberry = require('monkberry');
+var Template = require('./view.monk');
+
+var view = Monkberry.render(Template, document.body);
+view.update({name: 'Monkberry'});

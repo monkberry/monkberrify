@@ -31,6 +31,10 @@ function compile(file, data, callback) {
 }
 
 function monkberrify(file) {
+  if (!monkberrify.pattern.test(file)) {
+    return through();
+  }
+
   var data = '', stream = through(write, end);
 
   return stream;
@@ -49,6 +53,7 @@ function monkberrify(file) {
 }
 
 monkberrify.compile = compile;
+monkberrify.pattern = /\.monk$/;
 monkberrify.globals = [];
 
 module.exports = monkberrify;

@@ -23,9 +23,14 @@ gulp.task('default', function() {
 app.js:
 
 ```js
-var monkberry = require('monkberry');
+var Monkberry = require('monkberry');
+var Template = require('./view.monk');
 
-monkberry.mount(require('./view.html'));
+var view = Monkberry.render(Template, document.body);
 ```
 
-By default monkberrify will apply to `.html` and `.monk` files.
+By default monkberrify will apply to `.monk` files. To add your own extension override pattern:
+
+```js
+monkberrify.pattern = /\.monk$/;
+```
